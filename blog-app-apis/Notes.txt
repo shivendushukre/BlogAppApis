@@ -1,0 +1,35 @@
+# JWT based authentication
+
+* JWT - JSON web token
+* used mostly to secure REST APIs
+* one of the best ways to communicate securely b/w client and server.
+* JWT follows stateless authentication mechanism.
+
+
+## Architecture of JWT
+
+1. Header (Algo+Type) --> x
+
+2. Payload (Info about claims -> Data) --> y
+
+3. Signature (encoded header+ encoded payload + key) --> z
+
+x.y.z --> token ( this token is sent to client to authenticate)
+
+
+## Steps to implement JWT (SpringBoot project)
+
+1. add dep (io.jsonwebtoken)
+2. Create JWTAuthenticationEntryPoint implements AuthenticationEntryPoint
+3. Create JWTTokenHelper
+4. Create JWTAuthenticationFilter extends OnceRequestFilter
+  4.1. get JWT token from request
+  4.2 Validate token (expiry, etc.)
+  4.3 get user from token
+  4.4 load user associated with token
+  4.5 set spring security
+5. Create JWTAuthResponse
+6. Configure JWT in spring security
+7. Create login API to return token
+8. Test the application
+

@@ -1,9 +1,10 @@
 package com.blogApp.blog_app_apis.controllers;
 
 
-import com.blogApp.blog_app_apis.entities.Post;
+import com.blogApp.blog_app_apis.AppConstants;
 import com.blogApp.blog_app_apis.payloads.ApiResponse;
 import com.blogApp.blog_app_apis.payloads.PostDto;
+import com.blogApp.blog_app_apis.payloads.PostResponse;
 import com.blogApp.blog_app_apis.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -52,9 +53,11 @@ public class PostController {
 
     // get all posts
     @GetMapping("/posts")
-    public ResponseEntity<List<PostDto>> getAllPosts() {
-        List<PostDto> allPosts = this.postService.getAllPosts();
-        return new ResponseEntity<>(allPosts, HttpStatus.OK);
+    public ResponseEntity<PostResponse> getAllPosts(@RequestParam(value = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
+                                                    @RequestParam(value = "pageSize", defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize,
+                                                    @RequestParam(value = "sortBy", defaultValue = AppConstants.SORT_BY, required = false) String sortBy) {
+        PostResponse postResponse = this.postService.getAllPosts(pageNumber, pageSize, sortBy);
+        return new ResponseEntity<>(postResponse, HttpStatus.OK);
     }
 
     // delete post by Id
@@ -65,9 +68,17 @@ public class PostController {
     }
 
     // update a post
-//    @PutMapping("/post/{postId}")
-//    public ResponseEntity<PostDto> updatePostById(@RequestBody PostDto postDto, @PathVariable Integer postId) {
-//
-//    }
+    @PutMapping("/post/{postId}")
+    public ResponseEntity<PostDto> updatePostById(@RequestBody PostDto postDto, @PathVariable Integer postId) {
+        PostDto updatedPostDto = this.postService.updatePost(postDto, postId);
+        return new ResponseEntity<>(updatedPostDto, HttpStatus.OK);
+    }
+
+    // search a post
+    @GetMapping("/post/search/{keyword}")
+    public ResponseEntity<List<PostDto>> searchPostByTitle(@PathVariable String keyword) {
+        List<PostDto> postDtos = this.postService.searchPosts(keyword);
+        return new ResponseEntity<>(postDtos, HttpStatus.OK);
+    }
 
 }
