@@ -33,3 +33,7 @@ x.y.z --> token ( this token is sent to client to authenticate)
 7. Create login API to return token
 8. Test the application
 
+
+Swagger API doc: http://localhost:8080/swagger-ui/index.html#/
+token cannot be generated as of now
+

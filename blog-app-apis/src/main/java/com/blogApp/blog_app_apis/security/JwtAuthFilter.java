@@ -35,7 +35,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         // Bearer 23254fdfs
 
-        System.out.println(requestToken);
+        System.out.println("Request token is" + requestToken);
 
         String username = null;
         String token = null;
@@ -71,7 +71,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 System.out.println("Invalid JWT token");
             }
         } else {
-            System.out.println("Username is null or Security Content is null");
+            System.out.println("Username is null or Security Context is null");
         }
 
         filterChain.doFilter(request, response);
