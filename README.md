@@ -6,4 +6,4 @@ The user can login, register, post a blog, update or delete them. Users can also
 
 The user is authenticated using JWT (JSON Web Token) token and then allowed to access APIs. 
 
-Tech stack- Java, Springboot, Spring security, Swagger UI (for documentation), JWT authentication, MySQL.
+Tech stack- Java, Springboot, Spring security, Swagger UI (for documentation), JWT authentication, MySQL, Postman.
